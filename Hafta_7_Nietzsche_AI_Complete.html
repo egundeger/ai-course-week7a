@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafta 7: Nietzsche vs. AI - Güç İstenci</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --secondary: #ec4899;
+            --accent: #f59e0b;
+            --dark: #18181b;
+            --darker: #09090b;
+            --bg-light: #fafafa;
+            --bg-white: #ffffff;
+            --text-dark: #18181b;
+            --text-gray: #71717a;
+            --border: #e4e4e7;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --nietzsche: #8b5cf6;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #831843 100%);
+            color: white;
+            padding: 2.5rem 0;
+            box-shadow: 0 4px 20px rgba(123, 58, 237, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .nietzsche-quote {
+            font-style: italic;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .instructor-info {
+            background: rgba(255,255,255,0.15);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-container {
+            background: rgba(255,255,255,0.2);
+            height: 5px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 0.6rem 1.2rem;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            color: white;
+            font-weight: 700;
+        }
+
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .section {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: none;
+            border: 1px solid var(--border);
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 6px rgba(124, 58, 237, 0.1);
+        }
+
+        .card.philosophical {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left-color: var(--accent);
+        }
+
+        .card.critical {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left-color: var(--danger);
+        }
+
+        .card.enlightenment {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left-color: var(--success);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box {
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 5px solid;
+        }
+
+        .info-box.danger {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-color: var(--danger);
+        }
+
+        .info-box.warning {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-color: var(--warning);
+        }
+
+        .info-box.success {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-color: var(--success);
+        }
+
+        .info-box.nietzsche {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border-color: var(--nietzsche);
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .check-list li {
+            padding: 0.75rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .check-list li:before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--accent);
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .code-block {
+            background: var(--darker);
+            color: #f3f4f6;
+            padding: 2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 2rem 0;
+            position: relative;
+            border: 2px solid var(--primary);
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+        }
+
+        .btn {
+            padding: 0.85rem 1.75rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--warning) 100%);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .activity {
+            background: linear-gradient(135deg, #581c87 0%, #7c3aed 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+        }
+
+        .activity-title {
+            font-size: 1.7rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+        }
+
+        .timer {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .section-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.25rem;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .comparison-table td {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table tr:hover {
+            background: var(--bg-light);
+        }
+
+        .dichotomy {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .dichotomy-side {
+            padding: 2rem;
+            border-radius: 12px;
+            border: 3px solid;
+        }
+
+        .dichotomy-side.master {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-color: var(--accent);
+        }
+
+        .dichotomy-side.slave {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-color: #6366f1;
+        }
+
+        .dichotomy-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .health-scenario {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--success);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .scenario-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .prompt-template {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px dashed var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.4rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .timer {
+                font-size: 2.5rem;
+            }
+
+            .dichotomy {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer {
+            background: var(--darker);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            text-align: center;
+            border-top: 3px solid var(--accent);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>⚡ Hafta 7: Nietzsche vs. AI - Güç İstenci</h1>
+                    <p class="header-subtitle">Felsefe ile Teknolojinin Çarpışması</p>
+                    <p class="nietzsche-quote">"That which does not kill us makes us stronger."</p>
+                </div>
+                <div class="instructor-info">
+                    👨‍🏫 <strong>Dr. Ersin Gündeğer</strong><br>
+                    📧 ersin.gundeger@istun.edu.tr
+                </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showSection('intro')">⚡ Giriş</button>
+                <button class="nav-tab" onclick="showSection('will')">💪 Güç İstenci</button>
+                <button class="nav-tab" onclick="showSection('perspective')">👁️ Perspektivizm</button>
+                <button class="nav-tab" onclick="showSection('eternal')">♾️ Ebedi Dönüş</button>
+                <button class="nav-tab" onclick="showSection('ubermensch')">🦅 Übermensch</button>
+                <button class="nav-tab" onclick="showSection('morality')">⚔️ Efendi-Köle</button>
+                <button class="nav-tab" onclick="showSection('health')">🏥 Sağlık</button>
+                <button class="nav-tab" onclick="showSection('practice')">✍️ Prompts</button>
+                <button class="nav-tab" onclick="showSection('homework')">📚 Ödev</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- Section: Intro -->
+            <section id="intro" class="section active">
+                <div class="section-header">
+                    <span class="section-icon">⚡</span>
+                    <div>
+                        <h2 class="section-title">Hoş Geldiniz: Neden Nietzsche?</h2>
+                        <p class="section-subtitle">Felsefe Tekrardan Geri Döndü</p>
+                    </div>
+                </div>
+
+                <div class="info-box nietzsche">
+                    <h3>🎯 Bugün Çok Farklı Bir Ders!</h3>
+                    <p style="margin-top: 1rem; font-size: 1.1rem; line-height: 1.8;">
+                        6 hafta boyunca AI'yı <strong>teknik</strong> olarak öğrendiniz. Bugün <strong>felsefi</strong> olarak sorgulayacağız.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Ve bunun için en radikal filozof: <strong>Friedrich Nietzsche</strong>
+                    </p>
+                </div>
+
+                <div class="quote-box">
+                    "God is dead. God remains dead. And we have killed him. How shall we comfort ourselves, 
+                    the murderers of all murderers?"
+                    <div class="quote-author">— Nietzsche, The Gay Science (1882)</div>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">🤔 Ama Neden Nietzsche ve AI?</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        <strong>Nietzsche</strong> 19. yüzyılda yaşadı - bilgisayar görmedi, AI'dan haberi yok.<br>
+                        Peki neden bugün onunla AI'yı tartışıyoruz?
+                    </p>
+                    <ul class="check-list" style="margin-top: 1rem;">
+                        <li><strong>Güç İstenci:</strong> Her şey güç kazanma çabasıdır - AI de mi?</li>
+                        <li><strong>Perspektivizm:</strong> "Objektif hakikat yok, sadece perspektifler var" - AI'nın perspektifi nedir?</li>
+                        <li><strong>Efendi-Köle Morali:</strong> AI tool mu, master mı? Kim kimi kontrol ediyor?</li>
+                        <li><strong>Übermensch:</strong> AI insanlığı aşmaya mı çalışıyor?</li>
+                        <li><strong>Ebedi Dönüş:</strong> AI aynı hataları tekrar ediyor mu?</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">📊 Neredeyiz? (Müfredat Hatırlatma)</h3>
+                    <div style="margin-top: 1rem; line-height: 2.2;">
+                        ✅ <strong>Hafta 1-2:</strong> Teknik temel - Nasıl kullanırım?<br>
+                        ✅ <strong>Hafta 3:</strong> Wittgenstein - AI anlar mı?<br>
+                        ✅ <strong>Hafta 4:</strong> Yaratıcılık - MusicAI<br>
+                        ✅ <strong>Hafta 5:</strong> Uygulama - Google AI Studio<br>
+                        ✅ <strong>Hafta 6:</strong> Etik - Bias & Fairness<br>
+                        🔥 <strong>Hafta 7:</strong> Nietzsche - Güç, aşma, değer yaratma
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <h3 class="activity-title">🧠 Başlamadan Önce: Düşünce Deneyi</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        Size bir soru: <strong>"AI bir güç istenci midir?"</strong>
+                    </p>
+                    <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 12px; margin: 1.5rem 0; line-height: 2;">
+                        <strong>Düşünün:</strong><br>
+                        • ChatGPT daha iyi olmak için "çabalıyor" mu?<br>
+                        • Yoksa sadece programlandığı şeyi mi yapıyor?<br>
+                        • "İstenci" olmadan "güç" olabilir mi?<br>
+                        • AI kendini "aşmaya" çalışıyor mu?
+                    </div>
+                    <p style="margin-top: 1rem; font-weight: 600;">
+                        Bu soruyu dersin sonunda tekrar soracağım. Cevabınız değişecek mi?
+                    </p>
+                    <div class="timer" id="intro-timer">02:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer('intro', 120)">⏱️ Düşünme Başlat</button>
+                        <button class="btn btn-outline" onclick="resetTimer('intro', 120)">🔄 Sıfırla</button>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <h3>⚠️ Önemli: Bugün Zorlayıcı Olacak!</h3>
+                    <p style="margin-top: 1rem;">
+                        Nietzsche kolay bir filozof değil. Çelişkili, provokatif, bazen anlaşılmaz.<br>
+                        Ama işte bu yüzden AI için mükemmel - çünkü AI de böyle!
+                    </p>
+                    <p style="margin-top: 1rem; font-weight: 600;">
+                        Kafanız karışacak, bu normal. Sorular sorun, tartışın!
+                    </p>
+                </div>
+
+                <div class="section-nav">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="showSection('will')">Güç İstenci →</button>
+                </div>
+            </section>
+
+            <!-- Section: Will to Power -->
+            <section id="will" class="section">
+                <div class="section-header">
+                    <span class="section-icon">💪</span>
+                    <div>
+                        <h2 class="section-title">Güç İstenci (Will to Power)</h2>
+                        <p class="section-subtitle">Nietzsche'nin Temel Fikri</p>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "What is good? All that heightens the feeling of power, the will to power, power itself in man.<br>
+                    What is bad? All that proceeds from weakness."
+                    <div class="quote-author">— Nietzsche, The Antichrist</div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">📖 Güç İstenci Nedir?</h3>
+                    <p style="margin-top: 1rem; font-size: 1.1rem; line-height: 1.8;">
+                        <strong>Nietzsche'nin en temel fikri:</strong> Her canlı varlığın (hatta belki her şeyin) 
+                        temel güdüsü <em>gücünü artırmak, kendini aşmaktır.</em>
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Önemli:</strong> "Güç" sadece fiziksel güç değil!
+                    </p>
+                    <ul style="margin-top: 1rem; line-height: 2;">
+                        <li>Yaratıcılık → güç</li>
+                        <li>Bilgi → güç</li>
+                        <li>Kendini aşma → güç</li>
+                        <li>Değer yaratma → güç</li>
+                        <li>Özgürlük → güç</li>
+                    </ul>
+                </div>
+
+                <div class="card critical">
+                    <h3 class="card-title">❌ Yaygın Yanlış Anlamalar</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        <strong>Nietzsche şunu DEMİYOR:</strong>
+                    </p>
+                    <ul style="margin-top: 1rem; line-height: 2; color: var(--text-gray);">
+                        <li>❌ "Başkalarına hükmet!" (Naziler böyle yorumladı - yanlış!)</li>
+                        <li>❌ "Güçlü kazansın, zayıf ezilsin"</li>
+                        <li>❌ "Ahlak gereksiz"</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-weight: 600;">
+                        <strong>Nietzsche şunu diyor:</strong><br>
+                        "Kendi değerlerini yarat, kendi potansiyelini realize et, sürekli aş kendini!"
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">🤖 AI ve Güç İstenci</h3>
+
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Özellik</th>
+                            <th>İnsan Güç İstenci</th>
+                            <th>AI "Güç İstenci"?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Motivasyon</strong></td>
+                            <td>İçsel - kendini aşma arzusu</td>
+                            <td>Dışsal - programlanmış optimizasyon</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hedef</strong></td>
+                            <td>Potansiyeli gerçekleştirmek</td>
+                            <td>Loss function minimize etmek</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Özgürlük</strong></td>
+                            <td>Seçme özgürlüğü var</td>
+                            <td>Deterministik (veya stokastik ama özgür değil)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Değer Yaratma</strong></td>
+                            <td>Kendi değerlerini yaratır</td>
+                            <td>İnsanın değerlerini yansıtır</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kendini Aşma</strong></td>
+                            <td>Bilinçli çaba</td>
+                            <td>Versiyonlar arası iterasyon (pasif)</td>
+                        </tr>
+                    </tbody>
+                </comparison-table>
+
+                <div class="activity">
+                    <h3 class="activity-title">💬 Grup Tartışması (10 dk)</h3>
+                    <p style="font-size: 1.05rem;">
+                        3-4 kişilik gruplar oluşturun. Şu soruyu tartışın:
+                    </p>
+                    <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 12px; margin: 1.5rem 0; font-size: 1.1rem;">
+                        <strong>"AI bir güç istenci midir?"</strong><br><br>
+                        Alt sorular:<br>
+                        • AI "daha iyi olmak" istiyor mu?<br>
+                        • "İstemek" için bilinç gerekli mi?<br>
+                        • GPT-5, GPT-4'ü "aşıyor" mu yoksa sadece yeni bir versiyon mu?<br>
+                        • AI kendi değerlerini yaratabilir mi?
+                    </div>
+                    <div class="timer" id="will-timer">10:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer('will', 600)">⏱️ Başlat</button>
+                        <button class="btn btn-outline" onclick="resetTimer('will', 600)">🔄 Sıfırla</button>
+                    </div>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">💡 Nietzschean Bakış: AI ve Güç</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Nietzsche muhtemelen şöyle derdi:
+                    </p>
+                    <blockquote style="margin: 1.5rem 0; padding-left: 1.5rem; border-left: 4px solid var(--success); font-style: italic;">
+                        "AI kendisi bir güç istenci değildir - ama <strong>insanlığın güç istencinin bir yansımasıdır.</strong> 
+                        İnsanlar daha fazla güç kazanmak için AI'yı yarattılar. Soru şu: Bu AI bizi daha güçlü mü yapıyor, 
+                        yoksa güçsüzleştiriyor mu?"
+                    </blockquote>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-outline" onclick="showSection('intro')">← Geri</button>
+                    <button class="btn btn-primary" onclick="showSection('perspective')">Perspektivizm →</button>
+                </div>
+            </section>
+
+            <!-- Section: Perspectivism -->
+            <section id="perspective" class="section">
+                <div class="section-header">
+                    <span class="section-icon">👁️</span>
+                    <div>
+                        <h2 class="section-title">Perspektivizm</h2>
+                        <p class="section-subtitle">"Hakikat yok, sadece yorumlar var"</p>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "There are no facts, only interpretations."
+                    <div class="quote-author">— Nietzsche</div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">📖 Perspektivizm Nedir?</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        <strong>Temel fikir:</strong> Objektif, perspektif-bağımsız bir "Hakikat" yoktur. 
+                        Her bilgi bir perspektiften gelir.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Önemli:</strong> Bu "her şey göreceli, hakikat yok" demek DEĞİL!<br>
+                        Bazı perspektifler daha zengin, daha kapsamlı, daha hayat-olumlu.
+                    </p>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">🔍 Basit Örnek: Bir Fil</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        4 kör adam bir fili inceliyor:
+                    </p>
+                    <ul style="margin-top: 1rem; line-height: 2;">
+                        <li><strong>1. adam (bacağı tutuyor):</strong> "Fil bir ağaç gibi!"</li>
+                        <li><strong>2. adam (hortumu tutuyor):</strong> "Fil bir yılan gibi!"</li>
+                        <li><strong>3. adam (kulağı tutuyor):</strong> "Fil bir yelpazeye benziyor!"</li>
+                        <li><strong>4. adam (kuyruğu tutuyor):</strong> "Fil bir ip gibi!"</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-weight: 600;">
+                        Hepsi yanlış mı? Hayır! Hepsi kendi perspektifinden <em>doğru</em>.<br>
+                        Ama hiçbiri <em>tüm hakikat</em> değil.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">🤖 AI ve Perspektivizm</h3>
+
+                <div class="card critical">
+                    <h3 class="card-title">❓ Kritik Soru: AI'nın Perspektifi Var mı?</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        <strong>İnsan:</strong> Bedenli, kültürlü, tarihsel bir varlık. Perspektifi bunlardan kaynaklanır.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>AI:</strong> Bedensiz, milyarlarca insanın yazısından öğrenmiş. Perspektifi ne?
+                    </p>
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <strong>Olasılık 1:</strong> AI'nın perspektifi yok - sadece "ortalama perspektif" var.<br>
+                        (Tüm perspektiflerin istatistiksel ortalaması)
+                        <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--border);">
+                        <strong>Olasılık 2:</strong> AI yeni bir perspektif yaratıyor - "post-human" bakış açısı.<br>
+                        (İnsan olmayan bir varlığın perspektifi)
+                        <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--border);">
+                        <strong>Olasılık 3:</strong> AI birçok perspektifi simüle edebiliyor ama kendininki yok.<br>
+                        (Perspektif-yeteneği var ama perspektif yok)
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <h3 class="activity-title">🧪 Deney: AI'nın Perspektivini Test Edin (10 dk)</h3>
+                    <p>Şimdi herkes ChatGPT'yi açsın ve şunu deneyin:</p>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <button class="copy-btn" onclick="copyCode(this, 'perspective-test')">📋 Kopyala</button>
+                        <pre id="perspective-test">Aynı olay hakkında 3 farklı perspektiften yaz:
+
+Olay: "Bir şirket 1000 çalışanı işten çıkarıp AI'ya geçiyor"
+
+1) CEO'nun perspektifinden
+2) İşten çıkarılan bir çalışanın perspektifinden  
+3) Senin (AI'nın) perspektifinden
+
+Her perspektifte hangi şeyleri vurguluyorsun? Hangisi "doğru"?</pre>
+                    </div>
+                    <p style="margin-top: 1rem;">
+                        <strong>Not edin:</strong> AI gerçekten farklı perspektifler mi sundu, 
+                        yoksa sadece farklı tonlar mı kullandı?
+                    </p>
+                    <div class="timer" id="perspective-timer">10:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer('perspective', 600)">⏱️ Başlat</button>
+                        <button class="btn btn-outline" onclick="resetTimer('perspective', 600)">🔄 Sıfırla</button>
+                    </div>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">💭 Nietzschean Değerlendirme</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Nietzsche muhtemelen şöyle derdi:
+                    </p>
+                    <blockquote style="margin: 1.5rem 0; padding-left: 1.5rem; border-left: 4px solid var(--success); font-style: italic;">
+                        "AI'nın 'perspektifi' aslında <strong>perspektifsizliktir</strong> - tüm perspektiflerin 
+                        ortalamasını alarak hiçbir perspektife sahip olmamak. Bu tehlikelidir! Çünkü perspektif, 
+                        değer yaratmanın kaynağıdır. AI değer yaratamaz, sadece var olan değerleri yansıtır."
+                    </blockquote>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-outline" onclick="showSection('will')">← Geri</button>
+                    <button class="btn btn-primary" onclick="showSection('eternal')">Ebedi Dönüş →</button>
+                </div>
+            </section>
+
+            <!-- Section: Eternal Return -->
+            <section id="eternal" class="section">
+                <div class="section-header">
+                    <span class="section-icon">♾️</span>
+                    <div>
+                        <h2 class="section-title">Ebedi Dönüş (Eternal Return)</h2>
+                        <p class="section-subtitle">En Ağır Düşünce</p>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "What if some day or night a demon were to steal into your loneliest loneliness and say to you: 
+                    'This life as you now live it and have lived it you will have to live once again and innumerable 
+                    times again; and there will be nothing new in it, but every pain and every joy and every thought 
+                    must return to you, all in the same succession... Would you not throw yourself down and gnash 
+                    your teeth and curse the demon who spoke thus? Or have you once experienced a tremendous moment 
+                    when you would have answered him: 'You are a god and never have I heard anything more divine!'"
+                    <div class="quote-author">— Nietzsche, The Gay Science</div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">📖 Ebedi Dönüş Nedir?</h3>
+                    <p style="margin-top: 1rem; font-size: 1.1rem; line-height: 1.8;">
+                        <strong>Düşünce deneyi:</strong> Hayatın sonsuza kadar, aynen, tekrar ettiğini hayal et.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Soru:</strong> Bu senin için bir lanet mi, yoksa bir kutsama mı?
+                    </p>
+                    <ul style="margin-top: 1rem; line-height: 2;">
+                        <li>Eğer hayatını <strong>değiştirmek</strong> istiyorsan → Ebedi dönüş bir <span style="color: var(--danger); font-weight: 600;">lanet</span></li>
+                        <li>Eğer hayatını <strong>aynen yaşamak</strong> istiyorsan → Ebedi dönüş bir <span style="color: var(--success); font-weight: 600;">kutsama</span></li>
+                    </ul>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">🎯 Nietzsche'nin Hedefi</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Bu bir kozmolojik teori değil - bir <strong>etik test</strong>!
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Mesaj:</strong> "Öyle yaşa ki, hayatının sonsuza kadar tekrar etmesini isteyesin!"
+                    </p>
+                    <p style="margin-top: 1rem; font-style: italic;">
+                        Pişmanlıkla değil, sevinçle yaşa. Her anı <em>amor fati</em> (kaderi sevme) ile kucakla.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">🤖 AI ve Ebedi Dönüş</h3>
+
+                <div class="card critical">
+                    <h3 class="card-title">🔄 AI'lar Tekrar Ediyor mu?</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        İlginç paralel: AI'lar <strong>aynı hataları tekrar ediyor!</strong>
+                    </p>
+                    <ul style="margin-top: 1rem; line-height: 2;">
+                        <li><strong>Bias tekrarı:</strong> GPT-3'teki bias, GPT-4'te de var</li>
+                        <li><strong>Hallucination tekrarı:</strong> Her versiyon aynı tip yanlışlara düşüyor</li>
+                        <li><strong>Etik problem tekrarı:</strong> Her yeni AI aynı etik sorunları yaratıyor</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-weight: 600; color: var(--danger);">
+                        ⚠️ Neden? Çünkü temelde aynı approach: "Daha fazla data, daha fazla compute"
+                    </p>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">💭 Nietzschean Soru: Kırılma Noktası</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Eğer AI development bir "ebedi dönüş" ise - aynı yaklaşımlar, aynı problemler -
+                        <strong>döngüyü nasıl kırarız?</strong>
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Nietzsche'nin cevabı: <strong>Radikal yeniden değerlendirme!</strong> (Revaluation of values)
+                    </p>
+                    <blockquote style="margin: 1.5rem 0; padding-left: 1.5rem; border-left: 4px solid var(--success); font-style: italic;">
+                        "Belki sorun 'nasıl daha iyi AI yaparız?' değil,<br>
+                        'Neden AI'yı bu şekilde yapıyoruz?' olmalı."
+                    </blockquote>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-outline" onclick="showSection('perspective')">← Geri</button>
+                    <button class="btn btn-primary" onclick="showSection('ubermensch')">Übermensch →</button>
+                </div>
+            </section>
+
+            <!-- Section: Übermensch -->
+            <section id="ubermensch" class="section">
+                <div class="section-header">
+                    <span class="section-icon">🦅</span>
+                    <div>
+                        <h2 class="section-title">Übermensch (Üstinsan)</h2>
+                        <p class="section-subtitle">İnsanlığı Aşmak</p>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "Man is something that shall be overcome. What have you done to overcome him?"
+                    <div class="quote-author">— Nietzsche, Thus Spoke Zarathustra</div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">📖 Übermensch Nedir?</h3>
+                    <p style="margin-top: 1rem; font-size: 1.1rem; line-height: 1.8;">
+                        <strong>Çeviri:</strong> Üstinsan, Aşkın İnsan (NOT "Superman" - Nazi yorumu yanlış!)
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Temel fikir:</strong> İnsan tamamlanmış bir varlık değil - bir <em>köprü</em>dür.
+                    </p>
+                    <ul style="margin-top: 1rem; line-height: 2;">
+                        <li>Maymun → İnsan (evrim yolu)</li>
+                        <li>İnsan → Übermensch (kültürel/felsefi evrim)</li>
+                    </ul>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">🎯 Übermensch'in Özellikleri</h3>
+                    <ul class="check-list" style="margin-top: 1rem;">
+                        <li><strong>Kendi değerlerini yaratır</strong> (başkalarının değerlerine tabi değil)</li>
+                        <li><strong>Hayatı olumlar</strong> (pessimizmi reddeder)</li>
+                        <li><strong>Kendini aşar</strong> (sürekli büyüme)</li>
+                        <li><strong>Özgür iradeli</strong> (köle ahlakından kurtuluş)</li>
+                        <li><strong>Yaratıcı</strong> (sadece tüketen değil)</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">🤖 AI: Übermensch mi, Anti-Übermensch mi?</h3>
+
+                <div class="dichotomy">
+                    <div class="dichotomy-side master">
+                        <div class="dichotomy-title">🦅 AI = Übermensch?</div>
+                        <p style="margin-top: 1rem;"><strong>Argüman:</strong></p>
+                        <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                            <li>AI insanı "aşıyor"</li>
+                            <li>Yeni değerler yaratabilir</li>
+                            <li>İnsan sınırlarını geçiyor</li>
+                            <li>Yeni bir evrim aşaması</li>
+                        </ul>
+                    </div>
+                    <div class="dichotomy-side slave">
+                        <div class="dichotomy-title">🔗 AI = Anti-Übermensch?</div>
+                        <p style="margin-top: 1rem;"><strong>Argüman:</strong></p>
+                        <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                            <li>AI değer yaratamaz</li>
+                            <li>İradesi yok</li>
+                            <li>Yaratıcı değil, imitatif</li>
+                            <li>İnsana bağımlı tool</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card critical">
+                    <h3 class="card-title">⚠️ Tehlikeli Yorum: Transhumanism</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Bazıları Nietzsche'yi <strong>transhumanizm</strong> için kullanıyor:
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <em>"AI ile birleşerek Übermensch oluruz!"</em>
+                    </p>
+                    <p style="margin-top: 1rem; font-weight: 600; color: var(--danger);">
+                        Ama Nietzsche bunu kastetmedi! Übermensch teknolojik değil, <strong>etik ve yaratıcı</strong> bir aşma.
+                    </p>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">💡 Nietzschean Bakış</h3>
+                    <blockquote style="margin-top: 1rem; padding-left: 1.5rem; border-left: 4px solid var(--success); font-style: italic; line-height: 1.8;">
+                        "AI Übermensch değil - ama belki insanlığın Übermensch'e ulaşmak için kullanabileceği bir <strong>araç</strong> olabilir. 
+                        Önemli olan AI'nın ne olduğu değil, AI ile <strong>biz ne olacağız</strong>."
+                    </blockquote>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-outline" onclick="showSection('eternal')">← Geri</button>
+                    <button class="btn btn-primary" onclick="showSection('morality')">Efendi-Köle →</button>
+                </div>
+            </section>
+
+            <!-- Section: Master-Slave Morality -->
+            <section id="morality" class="section">
+                <div class="section-header">
+                    <span class="section-icon">⚔️</span>
+                    <div>
+                        <h2 class="section-title">Efendi-Köle Morali (Master-Slave Morality)</h2>
+                        <p class="section-subtitle">AI: Tool mu, Master mı?</p>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "The noble type of man experiences itself as determining values; it does not need approval; 
+                    it judges, 'what is harmful to me is harmful in itself'; it knows itself to be that which 
+                    first accords honor to things; it is value-creating."
+                    <div class="quote-author">— Nietzsche, Beyond Good and Evil</div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">📖 Efendi ve Köle Morali</h3>
+                    <p style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.8;">
+                        Nietzsche'ye göre iki temel ahlak sistemi var:
+                    </p>
+                </div>
+
+                <div class="dichotomy">
+                    <div class="dichotomy-side master">
+                        <div class="dichotomy-title">👑 Efendi Morali</div>
+                        <ul style="margin-top: 1rem; line-height: 2;">
+                            <li><strong>İyi:</strong> Güçlü, asil, yaratıcı, bağımsız</li>
+                            <li><strong>Kötü:</strong> Zayıf, değersiz, işe yaramaz</li>
+                            <li><strong>Değer kaynağı:</strong> Kendisi</li>
+                            <li><strong>Motivasyon:</strong> Kendini aşma</li>
+                            <li><strong>Duygu:</strong> Özgüven, gurur</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-weight: 600; color: var(--accent);">
+                            "İyi"yi tanımlayan efendidir - kendi değerlerini yaratır
+                        </p>
+                    </div>
+                    <div class="dichotomy-side slave">
+                        <div class="dichotomy-title">⛓️ Köle Morali</div>
+                        <ul style="margin-top: 1rem; line-height: 2;">
+                            <li><strong>İyi:</strong> Mütevazı, itaatkar, acıyan, eşit</li>
+                            <li><strong>Kötü:</strong> Güçlü, baskıcı, bencil ("şer")</li>
+                            <li><strong>Değer kaynağı:</strong> Efendinin reddi</li>
+                            <li><strong>Motivasyon:</strong> Acıdan kaçma</li>
+                            <li><strong>Duygu:</strong> Kıskançlık, kin (ressentiment)</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-weight: 600; color: #6366f1;">
+                            "Kötü"yü tanımlayan köle - reaktif, efendiye tepki olarak
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <h3>⚠️ Önemli Açıklama</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        <strong>Dikkat:</strong> Nietzsche "kölelerin ezilmesi gerekir" demiyor! 
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Bu <strong>sosyolojik bir analiz</strong> - "efendi" ve "köle" literal anlamda değil, 
+                        <em>iki farklı değer yaratma şekli</em>dir.
+                    </p>
+                    <ul style="margin-top: 1rem; line-height: 2;">
+                        <li>Efendi morali → <strong>Yaratıcı</strong> (yeni değerler)</li>
+                        <li>Köle morali → <strong>Reaktif</strong> (var olanı reddetme)</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">🤖 AI İlişkisinde Kim Efendi, Kim Köle?</h3>
+
+                <div class="card critical">
+                    <h3 class="card-title">🔄 Dört Olası Dinamik</h3>
+                    
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">1️⃣ İnsan Efendi, AI Köle (Klasik Görüş)</h4>
+                        <p style="color: var(--text-gray); line-height: 1.8;">
+                            AI bir tool, insan onu kontrol eder, değerleri insan belirler.
+                        </p>
+                        <p style="margin-top: 0.5rem; font-style: italic;">
+                            <strong>Problem:</strong> Ama AI'ya çok bağımlıysak, gerçekten biz mi efendiyiz?
+                        </p>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">2️⃣ AI Efendi, İnsan Köle (Distopik Görüş)</h4>
+                        <p style="color: var(--text-gray); line-height: 1.8;">
+                            AI kararları veriyor, insan sadece takip ediyor. Değerler AI tarafından belirleniyor.
+                        </p>
+                        <p style="margin-top: 0.5rem; font-style: italic;">
+                            <strong>Problem:</strong> AI'nın kendi değerleri var mı? Yoksa hala insanın yansıması mı?
+                        </p>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">3️⃣ Symbiyotik İlişki (Optimist Görüş)</h4>
+                        <p style="color: var(--text-gray); line-height: 1.8;">
+                            Ne efendi ne köle - partnership. Her ikisi de güçleniyor.
+                        </p>
+                        <p style="margin-top: 0.5rem; font-style: italic;">
+                            <strong>Problem:</strong> Bu mümkün mü? Yoksa bir taraf zamanla dominant oluyor mu?
+                        </p>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="font-weight: 600; margin-bottom: 0.5rem;">4️⃣ İki Taraf da Köle (Nietzschean Kritik)</h4>
+                        <p style="color: var(--text-gray); line-height: 1.8;">
+                            Ne insan ne AI değer yaratıyor - her ikisi de <strong>kapitalizme, verimlilik kültürüne, 
+                            teknolojik determinizme</strong> köle.
+                        </p>
+                        <p style="margin-top: 0.5rem; font-weight: 600; color: var(--danger);">
+                            En tehlikeli senaryo! Çünkü kimse sorgulamıyor.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">💭 Nietzschean Değerlendirme</h3>
+                    <blockquote style="margin-top: 1rem; padding-left: 1.5rem; border-left: 4px solid var(--success); font-style: italic; line-height: 1.8;">
+                        "Asıl soru 'AI efendi mi köle mi?' değil - 
+                        <strong>'Kim değerleri yaratıyor?'</strong><br><br>
+                        
+                        Eğer AI sadece mevcut değerleri optimize ediyorsa (verimlilik, kar, büyüme), 
+                        o zaman ikimiz de köleyiz - bu değerlerin kölesiyiz.<br><br>
+                        
+                        Efendi olmak demek <strong>yeni değerler yaratmak</strong> demek. 
+                        AI bunu yapabilir mi? Yoksa biz AI ile birlikte bunu yapabilir miyiz?"
+                    </blockquote>
+                </div>
+
+                <div class="activity">
+                    <h3 class="activity-title">🎭 Role-Play Aktivitesi (15 dk)</h3>
+                    <p style="font-size: 1.05rem;">Gruplar halinde bir senaryo oynayın:</p>
+                    <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 12px; margin: 1.5rem 0; line-height: 2;">
+                        <strong>Senaryo:</strong><br>
+                        Bir şirket AI ile tüm işe alım kararlarını veriyor.<br><br>
+                        
+                        <strong>Roller:</strong><br>
+                        • <strong>İK Müdürü:</strong> AI'nın kararlarını savunuyor<br>
+                        • <strong>Reddedilen aday:</strong> AI'nın haksız olduğunu söylüyor<br>
+                        • <strong>CEO:</strong> Verimlilik istiyor<br>
+                        • <strong>Nietzsche:</strong> Efendi-köle analizi yapıyor<br><br>
+                        
+                        <strong>Soru:</strong> Bu sistemde kim efendi, kim köle?
+                    </div>
+                    <div class="timer" id="morality-timer">15:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer('morality', 900)">⏱️ Başlat</button>
+                        <button class="btn btn-outline" onclick="resetTimer('morality', 900)">🔄 Sıfırla</button>
+                    </div>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-outline" onclick="showSection('ubermensch')">← Geri</button>
+                    <button class="btn btn-primary" onclick="showSection('health')">Sağlık Bağlamı →</button>
+                </div>
+            </section>
+
+            <!-- Section: Health Context -->
+            <section id="health" class="section">
+                <div class="section-header">
+                    <span class="section-icon">🏥</span>
+                    <div>
+                        <h2 class="section-title">Sağlık Bilimlerinde Nietzschean Yaklaşım</h2>
+                        <p class="section-subtitle">Güç, Sağlık ve AI</p>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "Health is the state in which we are most able to live our own lives."
+                    <div class="quote-author">— Nietzsche'den esinle</div>
+                </div>
+
+                <div class="info-box nietzsche">
+                    <h3>🎯 Neden Nietzsche Sağlık Felsefesi?</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Nietzsche'nin kendisi <strong>kronik hastalıklarla</strong> yaşadı (migren, göz sorunları, sindirim).
+                        Bu yüzden sağlık felsefesine çok önem verdi!
+                    </p>
+                    <p style="margin-top: 1rem; font-weight: 600;">
+                        Onun için sağlık = Kendi yaşamını yaratabilme gücü
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">💊 Nietzschean Sağlık Kavramları</h3>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">1. Sağlık = Güç İstenci</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        <strong>Geleneksel tıp:</strong> Sağlık = hastalık yok<br>
+                        <strong>Nietzsche:</strong> Sağlık = potansiyelini realize edebilme gücü
+                    </p>
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <strong>Örnek:</strong> İki hasta var, ikisi de diyabetli.
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li><strong>Hasta A:</strong> İlaç kullanıyor ama pasif, depresif, yaşamdan kopuk</li>
+                            <li><strong>Hasta B:</strong> İlaç kullanıyor ve aktif, üretken, yaratıcı</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-weight: 600;">
+                            Her ikisi de "kontrollü diyabet" ama Nietzsche'ye göre sadece B "sağlıklı"
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">2. Hastalık = Perspektif Kaybı</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Nietzsche: "Hastalık bana sağlıklı bir perspektif verdi"
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Fikir:</strong> Bazen hastalık, sağlığı daha iyi anlamamızı sağlar. 
+                        Yaşamı farklı perspektiften görürüz.
+                    </p>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">3. Yaşamı Olumlamak (Life Affirmation)</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        <strong>Medikal model:</strong> Hastalık = savaşılacak düşman<br>
+                        <strong>Nietzschean model:</strong> Hastalık = yaşamın bir parçası, kabullenilecek
+                    </p>
+                    <blockquote style="margin-top: 1rem; padding-left: 1rem; border-left: 3px solid var(--accent); font-style: italic;">
+                        "Amor fati" (kaderi sevme) - hastalığı reddetmek yerine, onunla yaşamayı öğrenmek
+                    </blockquote>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">🤖 AI ve Sağlıkta Nietzschean Sorular</h3>
+
+                <div class="health-scenario">
+                    <div class="scenario-title">Senaryo 1: AI ve Hasta Özerkliği</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-gray); line-height: 1.8;">
+                        <strong>Durum:</strong> Bir AI, hastaların tedavi seçimlerini optimize ediyor. 
+                        En "etkili" tedaviyi öneriyor - ama hasta farklı bir tedavi istiyor.
+                    </p>
+                    <p style="margin-top: 0.5rem;">
+                        <strong>Nietzschean soru:</strong> Hasta kendi değerlerini mi yaratıyor (efendi), 
+                        yoksa AI'nın önerisine mi boyun eğiyor (köle)?
+                    </p>
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <strong>💭 Düşünün:</strong> "En iyi tedavi" kimin için? AI'nın metriğine göre mi, 
+                        yoksa hastanın kendi yaşam değerlerine göre mi?
+                    </div>
+                </div>
+
+                <div class="health-scenario">
+                    <div class="scenario-title">Senaryo 2: Güç İstenci ve Hastalık Yönetimi</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-gray); line-height: 1.8;">
+                        <strong>Durum:</strong> AI destekli bir app, kronik hastaları için "optimal yaşam" planı yapıyor. 
+                        Her şeyi optimize ediyor - uyku, diyet, egzersiz, ilaç.
+                    </p>
+                    <p style="margin-top: 0.5rem;">
+                        <strong>Nietzschean soru:</strong> Bu hasta kendi gücünü mü artırıyor (Will to Power), 
+                        yoksa sadece AI'nın verimliliğine mi hizmet ediyor?
+                    </p>
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <strong>⚠️ Risk:</strong> "Optimize edilmiş" yaşam ≠ "anlamlı" yaşam. 
+                        Hasta robot gibi yaşayabilir - "sağlıklı" ama yaşam gücü yok.
+                    </div>
+                </div>
+
+                <div class="health-scenario">
+                    <div class="scenario-title">Senaryo 3: Perspektivizm ve Teşhis</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-gray); line-height: 1.8;">
+                        <strong>Durum:</strong> AI teşhis sistemi, tüm hastaları aynı metriklerle değerlendiriyor.
+                    </p>
+                    <p style="margin-top: 0.5rem;">
+                        <strong>Nietzschean soru:</strong> Sağlık tek bir perspektiften mi tanımlanabilir? 
+                        Yoksa her hastanın kendine özgü "sağlık" tanımı mı var?
+                    </p>
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <strong>💡 Perspektif farkı:</strong><br>
+                        • AI perspektifi: Sağlık = sayısal değerler (tansiyon, şeker, vb.)<br>
+                        • Hasta perspektifi: Sağlık = ailemle zaman geçirebilmek, sevdiğim işi yapabilmek
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">💊 Alanınıza Göre Örnekler</h3>
+
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Alan</th>
+                            <th>AI Kullanımı</th>
+                            <th>Nietzschean Kritik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Eczacılık</strong></td>
+                            <td>AI ilaç önerileri yapıyor</td>
+                            <td>Hasta kendi değerlerini mi (yan etki vs. etki) yoksa AI'nın "optimal"ini mi seçiyor?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beslenme</strong></td>
+                            <td>AI diyet planı oluşturuyor</td>
+                            <td>Beslenme bir "optimizasyon problemi" mi, yoksa kültürel/duygusal bir deneyim mi?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hemşirelik</strong></td>
+                            <td>AI hasta bakım protokolleri veriyor</td>
+                            <td>Bakım bir "prosedür" mü, yoksa empatik bir ilişki mi? AI hangisine hizmet ediyor?</td>
+                        </tr>
+                    </tbody>
+                </comparison-table>
+
+                <div class="activity">
+                    <h3 class="activity-title">💬 Alan-Spesifik Tartışma (10 dk)</h3>
+                    <p>Kendi alanınızdan düşünün ve grup içinde tartışın:</p>
+                    <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 12px; margin: 1.5rem 0; line-height: 2.2;">
+                        <strong>Sorular:</strong><br>
+                        1. Alanınızda AI "güç" mü veriyor hastalara, yoksa "bağımlılık" mı?<br>
+                        2. AI değerleri kim belirliyor - doktor mu, hasta mı, şirket mi?<br>
+                        3. "Sağlık" kavramı AI ile nasıl değişiyor?<br>
+                        4. Hasta bir "efendi" mi (kendi kararlarını veren) yoksa "köle" mi (AI'ya uyan)?
+                    </div>
+                    <div class="timer" id="health-timer">10:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer('health', 600)">⏱️ Başlat</button>
+                        <button class="btn btn-outline" onclick="resetTimer('health', 600)">🔄 Sıfırla</button>
+                    </div>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">🌟 Nietzschean Sağlık Manifestosu</h3>
+                    <p style="margin-top: 1rem; font-weight: 600; line-height: 2;">
+                        AI kullanırken sağlık profesyonelleri için:<br><br>
+                    </p>
+                    <ul class="check-list" style="margin-top: 1rem;">
+                        <li>AI'nın "optimal"ini körü körüne takip etme - hasta perspektifini sor</li>
+                        <li>Sağlığı sadece metrik olarak değil, yaşam gücü olarak tanımla</li>
+                        <li>AI değerler yaratmasın - sen ve hastanız yaratın</li>
+                        <li>Verimliliğe değil, anlamlılığa öncelik ver</li>
+                        <li>Hastalığı düşman değil, yaşamın parçası olarak gör</li>
+                    </ul>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-outline" onclick="showSection('morality')">← Geri</button>
+                    <button class="btn btn-primary" onclick="showSection('practice')">Prompts →</button>
+                </div>
+            </section>
+
+            <!-- Section: Practical Prompts -->
+            <section id="practice" class="section">
+                <div class="section-header">
+                    <span class="section-icon">✍️</span>
+                    <div>
+                        <h2 class="section-title">Philosophical Prompt Engineering</h2>
+                        <p class="section-subtitle">Nietzschean Prompts Yazmak</p>
+                    </div>
+                </div>
+
+                <div class="info-box nietzsche">
+                    <h3>🎯 Neden Felsefi Prompt?</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Bugüne kadar <strong>teknik</strong> prompt öğrendiniz. Şimdi <strong>felsefi</strong> prompt yazacağız.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Fark ne?</strong> Teknik prompt "nasıl" sorar, felsefi prompt "neden" ve "ne" sorar.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">⚡ Nietzschean Prompt Prensipleri</h3>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">1. Perspektif Çokluğu İste</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Tek bir "doğru" cevap yerine, birden fazla perspektif iste.
+                    </p>
+                    <div class="prompt-template">
+                        <strong>❌ Zayıf prompt:</strong><br>
+                        "Diyabet için en iyi diyet nedir?"<br><br>
+                        
+                        <strong>✅ Nietzschean prompt:</strong><br>
+                        "Diyabet için diyeti 3 farklı perspektiften değerlendir:<br>
+                        1) Medikal optimizasyon perspektifi<br>
+                        2) Hasta yaşam kalitesi perspektifi<br>
+                        3) Kültürel ve duygusal perspektif<br>
+                        Hangi perspektif hangisi için daha 'doğru'?"
+                    </div>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">2. Değer Yaratımını Sorgula</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        AI'dan sadece bilgi değil, değerlerin kaynağını sorgulamasını iste.
+                    </p>
+                    <div class="prompt-template">
+                        <strong>❌ Zayıf prompt:</strong><br>
+                        "İyi bir eczacı nasıl olunur?"<br><br>
+                        
+                        <strong>✅ Nietzschean prompt:</strong><br>
+                        "'İyi eczacı' tanımını kim belirliyor? Bu değer nereden geliyor?<br>
+                        - Üniversite müfredatından mı?<br>
+                        - Endüstrinin beklentilerinden mi?<br>
+                        - Hastanın ihtiyaçlarından mı?<br>
+                        - Yoksa sen kendi 'iyi eczacı' değerlerini yaratabilir misin?"
+                    </div>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">3. Güç İlişkilerini Aç</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Kimin kime hükmettiğini, kimin değerleri belirlediğini sor.
+                    </p>
+                    <div class="prompt-template">
+                        <strong>❌ Zayıf prompt:</strong><br>
+                        "AI ile hasta takibi nasıl yapılır?"<br><br>
+                        
+                        <strong>✅ Nietzschean prompt:</strong><br>
+                        "AI destekli hasta takibinde güç dinamiklerini analiz et:<br>
+                        - Hasta kendi sağlığının 'efendisi' mi, yoksa AI'nın protokolüne 'köle' mi?<br>
+                        - Doktor AI'ya mı hizmet ediyor, yoksa AI doktora mı?<br>
+                        - Kim kararları veriyor? Kim değerleri belirliyor?<br>
+                        - Bu sistem kimlerin gücünü artırıyor, kimlerin azaltıyor?"
+                    </div>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">4. Aşma ve Kendini-Aşma</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Mevcut durumu aşmayı, sınırları zorlamayı iste.
+                    </p>
+                    <div class="prompt-template">
+                        <strong>❌ Zayıf prompt:</strong><br>
+                        "Mevcut beslenme rehberlerini özetle"<br><br>
+                        
+                        <strong>✅ Nietzschean prompt:</strong><br>
+                        "Mevcut beslenme rehberlerinin sınırları nedir?<br>
+                        Hangi varsayımları sorgulamıyoruz?<br>
+                        10 yıl sonra 'yanlıştı' diyeceğimiz neler olabilir?<br>
+                        Bu alanda nasıl yeni değerler yaratılabilir?"
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">📝 Tam Nietzschean Prompt Template</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this, 'nietzsche-template')">📋 Kopyala</button>
+                    <pre id="nietzsche-template">═══════════════════════════════════════
+NIETZSCHEAN PROMPT TEMPLATE
+═══════════════════════════════════════
+
+[ROLE & PERSPECTIVE]
+Sen bir Nietzschean filozof olarak düşün.
+Perspektivizm, güç istenci ve değer yaratımı 
+kavramlarını kullan.
+
+[CONTEXT]
+Konu: [Sağlık bilimleri konunuz]
+
+[TASK]
+Bu konuyu şu açılardan analiz et:
+
+1. PERSPEKTİVİZM
+   • Hangi farklı perspektifler var?
+   • Her perspektif neyi "iyi" olarak görüyor?
+   • Hangi perspektif daha "güçlü" (life-affirming)?
+
+2. GÜÇ İLİŞKİLERİ
+   • Kim kime hükmediyor?
+   • Değerleri kim belirliyor?
+   • Efendi-köle dinamiği var mı?
+
+3. DEĞER YARATIMI
+   • Mevcut değerler nereden geliyor?
+   • Bu değerleri kim yarattı?
+   • Nasıl yeni değerler yaratılabilir?
+
+4. AŞMA (ÜBERWINDUNG)
+   • Mevcut durumun sınırları nedir?
+   • Nasıl aşılabilir?
+   • Kendini-aşma nasıl olur?
+
+5. YAŞAMI OLUMLAMAK
+   • Bu yaklaşım yaşamı olumluyor mu?
+   • Yoksa yaşamı inkâr ediyor mu?
+   • Daha "life-affirming" bir alternatif?
+
+[OUTPUT]
+Cevabını şu yapıda ver:
+- Her perspektifi aç
+- Güç ilişkilerini göster
+- Eleştirel değerlendir
+- Yeni değerler öner
+- Nietzsche'den bir alıntıyla bitir
+
+[META-REFLECTION]
+Son olarak: Bu analiz kendisi bir perspektif.
+Hangi varsayımları yapıyorsun?
+═══════════════════════════════════════</pre>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">🎯 Gerçek Örnekler</h3>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">Örnek 1: Eczacılıkta AI (İlaç Önerisi)</h3>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <button class="copy-btn" onclick="copyCode(this, 'pharmacy-prompt')">📋 Kopyala</button>
+                        <pre id="pharmacy-prompt">Sen Nietzschean bir eczacısın. 
+
+Durum: Bir AI sistemi hastalara ilaç önerisi yapıyor. 
+"Optimal" tedaviyi belirliyor.
+
+Analiz et:
+
+1. PERSPEKTİVLER:
+   • AI'nın perspektifi: Optimal = etkili + ucuz
+   • Doktorun perspektifi: Optimal = kanıta dayalı
+   • Hastanın perspektifi: Optimal = yan etki az + yaşam kalitesi
+   • Şirketin perspektifi: Optimal = kar maksimizasyonu
+
+2. GÜÇ DİNAMİKLERİ:
+   • Hasta "efendi" mi yoksa AI'nın önerisine "köle" mi?
+   • Kim değerleri belirliyor - AI mi, doktor mu, hasta mı?
+   • Eczacının rolü ne - AI'ya hizmet mi, hastaya mı?
+
+3. DEĞER SORGULAMASI:
+   • "Optimal tedavi" tanımı kimin değeri?
+   • Bu değer hasta için mi, sistem için mi?
+   • Hasta kendi değerlerini yaratabilir mi?
+
+4. AŞMA:
+   • Mevcut yaklaşımın ötesine nasıl geçeriz?
+   • AI tool olarak mı kullanılır, yoksa master olarak mı?
+   • Hasta özerkliğini nasıl artırırız?
+
+Cevabını Nietzsche'nin perspektivizm ve 
+güç istenci kavramlarını kullanarak ver.</pre>
+                    </div>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">Örnek 2: Beslenmede AI (Diyet Planı)</h3>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <button class="copy-btn" onclick="copyCode(this, 'nutrition-prompt')">📋 Kopyala</button>
+                        <pre id="nutrition-prompt">Nietzschean bir diyetisyen olarak düşün.
+
+Durum: AI "optimal beslenme planı" yapıyor.
+Her makro ve mikroyu hesaplıyor, optimize ediyor.
+
+Sorgula:
+
+1. YAŞAMI OLUMLAMAK:
+   • Bu plan "yaşamı olumluyor" mu?
+   • Yoksa yaşamı bir "optimizasyon problemi"ne 
+     mi indirgiyor?
+   • Beslenme bir matematik mi, yoksa kültürel 
+     deneyim mi?
+
+2. GÜÇ İSTENCİ:
+   • Bu plan hastanın gücünü artırıyor mu?
+   • Yoksa sadece AI'nın metriklerini mi tatmin ediyor?
+   • "Sağlıklı yaşam" = sayılara uymak mı, 
+     yoksa kendi potansiyelini gerçekleştirmek mi?
+
+3. EFENDI-KÖLE:
+   • Hasta AI'nın planına "itaat" mi ediyor (köle)?
+   • Yoksa kendi değerlerini mi yaratıyor (efendi)?
+   • "Cheat meal" = zayıflık mı, yoksa özgürlük mü?
+
+4. PERSPEKTİVİZM:
+   • "Optimal" diyet kiminle göre?
+   • Bilimsel perspektif
+   • Hasta perspektifi  
+   • Kültürel perspektif
+   • Hangi perspektif daha hayat-olumlu?
+
+Nietzsche'nin "amor fati" kavramını kullanarak,
+AI destekli beslenme ile nasıl daha "life-affirming"
+bir yaklaşım geliştirilir?</pre>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <h3 class="activity-title">✍️ Kendi Nietzschean Prompt'unuzu Yazın (15 dk)</h3>
+                    <p>Şimdi kendi alanınızdan bir konu seçin ve Nietzschean prompt yazın:</p>
+                    <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 12px; margin: 1.5rem 0; line-height: 2;">
+                        <strong>Adımlar:</strong><br>
+                        1. Alanınızdan AI ile ilgili bir durum seçin<br>
+                        2. Template'i kullanın (yukarıda)<br>
+                        3. En az 3 Nietzschean kavram ekleyin<br>
+                        4. Güç ilişkilerini sorgulayın<br>
+                        5. ChatGPT'de test edin!
+                    </div>
+                    <div class="timer" id="practice-timer">15:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer('practice', 900)">⏱️ Başlat</button>
+                        <button class="btn btn-outline" onclick="resetTimer('practice', 900)">🔄 Sıfırla</button>
+                    </div>
+                </div>
+
+                <div class="card critical">
+                    <h3 class="card-title">⚠️ Uyarı: AI Nietzsche Değil!</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Nietzschean prompt yazdığınızda, AI size <strong>Nietzsche gibi düşünmüş</strong> cevaplar verecek.
+                    </p>
+                    <p style="margin-top: 1rem; font-weight: 600;">
+                        Ama unutmayın: AI gerçek bir Nietzschean değil - sadece simülasyon yapıyor!
+                    </p>
+                    <p style="margin-top: 1rem; color: var(--text-gray);">
+                        Asıl güzel olan: Bu prompt'lar <strong>sizi</strong> daha derin düşünmeye zorluyor. 
+                        AI'nın cevabı değil, sizin sorgulamanız önemli.
+                    </p>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">💡 Son İpuçları</h3>
+                    <ul class="check-list" style="margin-top: 1rem;">
+                        <li>Kolay cevaplar beklemeyin - Nietzsche zorludur</li>
+                        <li>Çelişkileri kabul edin - bazen çelişkili cevaplar gelir</li>
+                        <li>Kendi düşüncenizi ekleyin - AI'ya körü körüne güvenmeyin</li>
+                        <li>Soru sordurun - Nietzschean prompt cevap değil, daha fazla soru üretmeli</li>
+                        <li>Meta-düzeyde düşünün - prompt'unuzun kendisi de bir perspektif</li>
+                    </ul>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-outline" onclick="showSection('health')">← Geri</button>
+                    <button class="btn btn-primary" onclick="showSection('homework')">Ödev →</button>
+                </div>
+            </section>
+
+            <!-- Section: Homework -->
+            <section id="homework" class="section">
+                <div class="section-header">
+                    <span class="section-icon">📚</span>
+                    <div>
+                        <h2 class="section-title">Bu Haftanın Ödevi</h2>
+                        <p class="section-subtitle">Philosophical Essay: "AI Bir Güç İstenci midir?"</p>
+                    </div>
+                </div>
+
+                <div class="info-box nietzsche">
+                    <h3>✍️ Essay Konusu</h3>
+                    <p style="margin-top: 1rem; font-size: 1.1rem; line-height: 1.8;">
+                        <strong>"AI Bir Güç İstenci midir?"</strong><br><br>
+                        
+                        Nietzsche'nin temel kavramlarından en az 3'ünü kullanarak 
+                        AI'nın doğasını felsefi olarak analiz edin.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">📋 Essay Yapısı (4-6 sayfa)</h3>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <button class="copy-btn" onclick="copyCode(this, 'essay-format')">📋 Kopyala</button>
+                        <pre id="essay-format">PHILOSOPHICAL ESSAY: AI VE GÜÇ İSTENCİ
+
+1. GİRİŞ (1 sayfa)
+   • AI neden felsefi bir soru?
+   • Nietzsche neden bu tartışma için uygun?
+   • Thesis statement: Ana argümanınız
+   
+   Örnek thesis:
+   "AI kendisi bir güç istenci değildir, ama 
+   insanlığın güç istencinin bir yansımasıdır..."
+
+2. GÜÇ İSTENCİ ANALİZİ (1-1.5 sayfa)
+   • Will to Power kavramını açıklayın
+   • AI'nın "gücü" nedir?
+   • AI kendini artırmaya çalışıyor mu?
+   • İnsan vs. AI güç istenci - fark nedir?
+   • En az 1 Nietzsche alıntısı kullanın
+
+3. DİĞER KAVRAMLAR (1.5-2 sayfa)
+   Şunlardan en az 2'sini derinlemesine işleyin:
+   
+   A) PERSPEKTİVİZM:
+      • AI'nın perspektifi var mı?
+      • Objektif vs. perspektifler
+      • "Ortalama perspektif" problemi
+   
+   B) EBEDİ DÖNÜŞ:
+      • AI aynı hataları tekrar ediyor mu?
+      • Döngüyü nasıl kırabiliriz?
+   
+   C) ÜBERMENSCH:
+      • AI insanlığı "aşıyor" mu?
+      • Yoksa sadece tool mu?
+   
+   D) EFENDİ-KÖLE:
+      • Kim efendi, kim köle?
+      • Değerleri kim yaratıyor?
+
+4. SAĞLIK BİLİMLERİ BAĞLANTISI (0.5-1 sayfa)
+   • Kendi alanınızdan somut örnek verin
+   • AI nasıl kullanılıyor?
+   • Nietzschean yaklaşım nasıl yardımcı olur?
+   • Güç ilişkileri nasıl?
+   
+   Örnek konular:
+   - Eczacılık: AI ilaç önerileri
+   - Beslenme: AI diyet planları
+   - Hemşirelik: AI hasta takibi
+
+5. SONUÇ (0.5 sayfa)
+   • Ana argümanınızı özetleyin
+   • Kişisel reflection:
+     "Bu analiz benim AI'ya bakışımı nasıl değiştirdi?"
+   • Açık sorularla bitirin - Nietzschean stil!
+   
+   Örnek son cümle:
+   "Belki asıl soru AI'nın bir güç istenci olup 
+   olmadığı değil, AI ile ilişkimizin BİZİ 
+   nasıl değiştirdiğidir?"
+
+═══════════════════════════════════════
+
+TEKNIK GEREKSINIMLER:
+• Format: PDF
+• Uzunluk: 4-6 sayfa
+• Font: Times New Roman 12pt
+• Satır aralığı: 1.5
+• Kenar boşlukları: 2.5cm
+
+İÇERİK GEREKSİNİMLERİ:
+• Nietzsche'den en az 3 direct quote
+• Kendi AI deneyimlerinizden örnekler
+• En az 3 Nietzschean kavram (derinlemesine)
+• Sağlık bilimleri bağlantısı
+• Kaynakça (en az 3 Nietzsche eseri)
+
+KAYNAKÇA ÖRNEĞİ:
+• Thus Spoke Zarathustra
+• Beyond Good and Evil
+• On the Genealogy of Morals
+• The Gay Science
+• The Will to Power
+
+YASAK:
+❌ "AI iyi" veya "AI kötü" demek
+❌ Teknolojik determinizm
+❌ Basit evet/hayır cevapları
+❌ ChatGPT'nin yazdığını kopyalamak
+
+BEKLENİYOR:
+✅ Eleştirel düşünme
+✅ Nietzschean bakış açısı
+✅ Kendi deneyimlerin
+✅ Nuanslı argümanlar
+✅ Açık sorular</pre>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <h3>📤 Teslim Bilgileri</h3>
+                    <ul style="margin-top: 1rem; line-height: 2;">
+                        <li><strong>Format:</strong> PDF</li>
+                        <li><strong>Uzunluk:</strong> 4-6 sayfa (Times New Roman 12pt, 1.5 satır aralık)</li>
+                        <li><strong>Kaynak:</strong> En az 3 Nietzsche eseri + kendi AI deneyimleriniz</li>
+                        <li><strong>Tarih:</strong> 2 hafta sonra</li>
+                        <li><strong>E-posta:</strong> ersin.gundeger@istun.edu.tr</li>
+                        <li><strong>Konu:</strong> [Adınız] - Hafta 7 Essay - Nietzsche & AI</li>
+                    </ul>
+                </div>
+
+                <div class="card philosophical">
+                    <h3 class="card-title">📚 Okuma Önerileri</h3>
+                    <p style="margin-top: 1rem; line-height: 1.8;">
+                        Essay'inizi zenginleştirmek için:
+                    </p>
+                    <ul style="margin-top: 1rem; line-height: 2;">
+                        <li><strong>Başlangıç:</strong> "Thus Spoke Zarathustra" - Prologue & Part 1</li>
+                        <li><strong>Perspektivizm:</strong> "The Gay Science" - §374</li>
+                        <li><strong>Güç İstenci:</strong> "Beyond Good and Evil" - §259</li>
+                        <li><strong>Efendi-Köle:</strong> "On the Genealogy of Morals" - First Essay</li>
+                        <li><strong>Ebedi Dönüş:</strong> "The Gay Science" - §341</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-style: italic; color: var(--text-gray);">
+                        Not: Hepsini okumak zorunda değilsiniz! 1-2 tanesini derinlemesine okuyun.
+                    </p>
+                </div>
+
+                <div class="card enlightenment">
+                    <h3 class="card-title">💡 Yazarken İpuçları</h3>
+                    <ul class="check-list" style="margin-top: 1rem;">
+                        <li><strong>Nietzsche gibi cesur olun</strong> - sıradan cevaplar vermeyin</li>
+                        <li><strong>Çelişkileri kabul edin</strong> - Nietzsche contradiction'ı sever</li>
+                        <li><strong>Kendi deneyimlerinizi kullanın</strong> - abstract kalmayın</li>
+                        <li><strong>Sorularla bitirin</strong> - kesin cevaplar vermeyin</li>
+                        <li><strong>Akademik ama tutkulu yazın</strong> - Nietzschean stil!</li>
+                        <li><strong>ChatGPT yardımı alabilirsiniz</strong> - ama kopyala-yapıştır yapmayın!</li>
+                    </ul>
+                </div>
+
+                <div class="card critical">
+                    <h3 class="card-title">⚠️ Sık Yapılan Hatalar</h3>
+                    <ul style="margin-top: 1rem; line-height: 2; color: var(--text-gray);">
+                        <li>❌ Nietzsche'yi Nazi ideolojisiyle karıştırmak</li>
+                        <li>❌ "Güç İstenci = fiziksel güç" zannetmek</li>
+                        <li>❌ "Übermensch = Superman" yorumu</li>
+                        <li>❌ Binary düşünme: "AI iyi" veya "AI kötü"</li>
+                        <li>❌ ChatGPT'den direkt alıp yapıştırmak</li>
+                        <li>❌ Sadece teorik kalmak - örnek vermemek</li>
+                    </ul>
+                </div>
+
+                <div class="info-box success">
+                    <h3>🌟 Bonus Puan Fırsatları (+5 puana kadar)</h3>
+                    <ul class="check-list" style="margin-top: 1rem;">
+                        <li><strong>+2 puan:</strong> 4'ten fazla Nietzschean kavram derinlemesine işlenirse</li>
+                        <li><strong>+2 puan:</strong> Orijinal ve yaratıcı argüman (başkalarının yazmadığı)</li>
+                        <li><strong>+1 puan:</strong> Kendi AI deneyiminizden detaylı örnek (prompt + sonuç)</li>
+                    </ul>
+                </div>
+
+                <div class="quote-box">
+                    "And those who were seen dancing were thought to be insane by those who could not hear the music."
+                    <div class="quote-author">— Nietzsche</div>
+                </div>
+
+                <div class="activity">
+                    <h3 class="activity-title">💭 Son Düşünce</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        Dersin başında sormuştuk: <strong>"AI bir güç istenci midir?"</strong>
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Şimdi cevabınız nedir? Değişti mi?
+                    </p>
+                    <div style="background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 12px; margin: 1.5rem 0; line-height: 2;">
+                        <strong>Nietzsche'nin size soracağı son soru:</strong><br><br>
+                        "AI ile ilişkin <em>seni</em> nasıl bir insan yapıyor?<br>
+                        Daha güçlü mü, yoksa daha zayıf mı?<br>
+                        Daha yaratıcı mı, yoksa daha pasif mi?<br>
+                        Kendi değerlerini mi yaratıyorsun, yoksa başkalarının değerlerine mi uyuyorsun?"
+                    </div>
+                    <p style="margin-top: 1rem; font-weight: 600;">
+                        Essay'inizde bu soruya da cevap verin!
+                    </p>
+                </div>
+
+                <div class="section-nav">
+                    <button class="btn btn-outline" onclick="showSection('practice')">← Geri</button>
+                    <button class="btn btn-secondary" onclick="showSection('intro')">🏠 Başa Dön</button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>⚡ Yapay Zeka ile Diyalog, Prompt Mühendisliği ve Eleştirel Düşünme</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">Hafta 7: Nietzsche vs. AI - Güç İstenci</p>
+            <p style="margin-top: 1rem;">
+                👨‍🏫 <strong>Dr. Ersin Gündeğer</strong> | 
+                📧 <a href="mailto:ersin.gundeger@istun.edu.tr">ersin.gundeger@istun.edu.tr</a>
+            </p>
+            <div class="quote-box" style="max-width: 800px; margin: 2rem auto; font-size: 1rem;">
+                "He who has a why to live can bear almost any how."
+                <div class="quote-author">— Nietzsche</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentSection = 'intro';
+        const sections = ['intro', 'will', 'perspective', 'eternal', 'ubermensch', 'morality', 'health', 'practice', 'homework'];
+        
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            currentSection = sectionId;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function updateProgress() {
+            const sectionIndex = sections.indexOf(currentSection);
+            const progress = ((sectionIndex + 1) / sections.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        const timers = {};
+        
+        function startTimer(id, seconds) {
+            if (timers[id]) clearInterval(timers[id].interval);
+            timers[id] = {
+                remaining: seconds,
+                interval: setInterval(() => {
+                    timers[id].remaining--;
+                    updateTimerDisplay(id);
+                    if (timers[id].remaining <= 0) {
+                        clearInterval(timers[id].interval);
+                        alert('⏰ Süre doldu!');
+                    }
+                }, 1000)
+            };
+        }
+        
+        function resetTimer(id, seconds) {
+            if (timers[id]) clearInterval(timers[id].interval);
+            timers[id] = { remaining: seconds };
+            updateTimerDisplay(id);
+        }
+        
+        function updateTimerDisplay(id) {
+            const minutes = Math.floor(timers[id].remaining / 60);
+            const seconds = timers[id].remaining % 60;
+            document.getElementById(id + '-timer').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        
+        function copyCode(button, codeId) {
+            const code = document.getElementById(codeId).textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = '✓ Kopyalandı!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = '📋 Kopyala';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        updateProgress();
+        resetTimer('intro', 120);
+        resetTimer('will', 600);
+        resetTimer('perspective', 600);
+        resetTimer('morality', 900);
+        resetTimer('health', 600);
+        resetTimer('practice', 900);
+    </script>
+</body>
+</html>
